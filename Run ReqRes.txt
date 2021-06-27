@@ -1,4 +1,4 @@
-
+// sample wsdl: http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?WSDL
 
 def tc=testRunner.testCase.testSuite.testCases["Capital"]
 
