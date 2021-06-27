@@ -1,0 +1,46 @@
+
+
+def tc=testRunner.testCase.testSuite.testCases["Capital"]
+
+
+def ts=tc.getTestStepByName("GetISO")
+
+def prop=ts.getPropertyValue("Request")
+
+def gr = new com.eviware.soapui.support.GroovyUtils( context )
+
+def req= gr.getXmlHolder(prop)
+
+req["//*:sCountryName"]="India"
+
+req.updateProperty()
+
+ts.run(testRunner,context)
+
+def res=ts.getPropertyValue("Response")
+def res1=gr.getXmlHolder(res)
+
+def iso=res1["//*:CountryISOCodeResult"]
+
+
+
+def ts2=tc.getTestStepByName("Capital")
+
+def req2=ts2.getPropertyValue("Request")
+
+def r2=gr.getXmlHolder(req2)
+
+r2["//*:sCountryISOCode"]=iso
+
+r2.updateProperty()
+
+log.info(r2["//*:sCountryISOCode"])
+
+ts2.run(testRunner,context)
+
+def ts2Res=ts2.getPropertyValue("Response")
+
+def resXml=gr.getXmlHolder(ts2Res)
+def finalRes=resXml["//*:CapitalCityResult"]
+
+log.info(finalRes)
