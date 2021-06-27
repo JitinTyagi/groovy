@@ -1,0 +1,16 @@
+def tc=testRunner.testCase.testSuite.testCases["Capital"]
+
+
+def ts=tc.getTestStepByName("GetISO")
+
+def prop=ts.getPropertyValue("Request")
+
+def gr = new com.eviware.soapui.support.GroovyUtils( context )
+
+def g= gr.getXmlHolder(prop)
+
+def h = g.getNodeValue("//*:sCountryName")
+
+log.info(h)
+
+log.info(g["//*:sCountryName"])
